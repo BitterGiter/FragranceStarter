@@ -1,18 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fragrance Finder</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Random Cat Facts</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 20px;
+    }
+    #cat-fact {
+      margin-top: 20px;
+      font-size: 1.2em;
+    }
+  </style>
 </head>
 <body>
-    <h1>Find Complementary Fragrances</h1>
-    <form id="fragrance-form">
-        <label for="fragrance-input">Enter a Fragrance:</label>
-        <input type="text" id="fragrance-input" name="fragrance" required>
-        <button type="submit">Find Complementary Fragrances</button>
-    </form>
-    <div id="results"></div>
-    <script src="app.js"></script>
+  <h1>Random Cat Facts</h1>
+  <button onclick="getCatFact()">Get Cat Fact</button>
+  <div id="cat-fact"></div>
+
+  <script>
+    function getCatFact() {
+      fetch('https://meowfacts.herokuapp.com/')
+        .then(response => response.json())
+        .then(data => {
+          document.getElementById('cat-fact').innerText = data.data[0];
+        })
+        .catch(error => console.error('Error:', error));
+    }
+  </script>
 </body>
 </html>
